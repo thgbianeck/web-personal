@@ -1,0 +1,8 @@
+{
+  "name": "ThiagoMoreiraBianeckBackend",
+  "version": "1.0.0",
+  "description": "Backen para a web www. thiagobianec.com.br",
+  "main": "index.js",
+  "author": "Thiago Moreira Bianeck",
+  "license": "MIT"
+}
