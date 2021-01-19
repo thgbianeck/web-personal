@@ -1,26 +1,18 @@
 import React from "react";
 import "./App.scss";
-import { DatePicker } from "antd";
-
-const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
-
-const onChange = (date, dateString) => {
-  console.log(date, dateString);
-};
+import Admin from "./pages/Admin";
+import SignIn from "./pages/Admin/SignIn";
+import Home from "./pages/Home";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
-    <div className="app">
-      <h1>Web Personal Cliente</h1>
-      <div>
-        <DatePicker onChange={onChange} />
-        <br />
-        <MonthPicker onChange={onChange} placeholder="Select month" />
-        <br />
-        <RangePicker onChange={onChange} />
-        <br />
-        <WeekPicker onChange={onChange} placeholder="Select week" />
-      </div>
+    <div>
+      <h1>Estamos em App</h1>
+      <Admin />
+      <SignIn />
+      <Home />
+      <Contact />
     </div>
   );
 }
