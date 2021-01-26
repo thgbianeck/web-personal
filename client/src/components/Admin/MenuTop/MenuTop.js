@@ -4,7 +4,9 @@ import Logo from "../../../assets/img/png/logo-white.png";
 
 import "./scss/MenuTop.scss";
 
-const MenuTop = () => {
+const MenuTop = (props) => {
+  const { menuCollapsed, setMenuCollapsed } = props;
+
   return (
     <div className="menu-top">
       <div className="menu-top__left">
@@ -13,8 +15,8 @@ const MenuTop = () => {
           src={Logo}
           alt="Thiago Moreira Bianeck"
         />
-        <Button type="link" onClick={() => console.log("Click.")}>
-          <Icon type="menu-fold" />
+        <Button type="link" onClick={() => setMenuCollapsed(!menuCollapsed)}>
+          <Icon type={menuCollapsed ? "menu-unfold" : "menu-fold"} />
         </Button>
       </div>
       <div className="menu-top__right">
