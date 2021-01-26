@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { Layout } from "antd";
 
-import "./LayoutBasic.scss";
+import "./scss/LayoutBasic.scss";
 
 export default function LayoutBasic(props) {
   const { routes } = props;
