@@ -2,6 +2,7 @@ import React from "react";
 import { Layout, Tabs } from "antd";
 import { Redirect } from "react-router-dom";
 import Logo from "../../../assets/img/png/logo-white.png";
+import RegisterForm from "../../../components/Admin/RegisterForm";
 
 import "./scss/SignIn.scss";
 
@@ -21,7 +22,7 @@ export default function SignIn() {
               Componente de LoginForm
             </TabPane>
             <TabPane tab={<span>Novo Usuário</span>} key="2">
-              Componente RegisterForm
+              <RegisterForm />
             </TabPane>
           </Tabs>
         </div>
