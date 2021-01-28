@@ -4,6 +4,7 @@ import {
   emailValidation,
   minLengthValidation,
 } from "../../../utils/formValidation";
+import { signUpApi } from "../../../api/user";
 
 import "./scss/RegisterForm.scss";
 
@@ -50,7 +51,7 @@ const RegisterForm = () => {
     }
   };
 
-  const register = (e) => {
+  const register = async (e) => {
     e.preventDefault();
     const { email, password, repeatPassword, privacyPolicy } = formValid;
     const emailVal = inputs.email;
@@ -68,9 +69,42 @@ const RegisterForm = () => {
           message: "As senhas devem ser iguais.",
         });
       } else {
-        // TODO: conectar com a API e registrar o usuário
+        const result = await signUpApi(inputs);
+        if (!result.ok) {
+          notification["error"]({
+            message: result.message,
+          });
+        } else {
+          notification["success"]({
+            message: result.message,
+          });
+          resetForm();
+        }
       }
     }
+  };
+
+  const resetForm = () => {
+    const inputs = document.getElementsByTagName("input");
+
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].classList.remove("success");
+      inputs[i].classList.remove("error");
+    }
+
+    setInputs({
+      email: "",
+      password: "",
+      repeatPassword: "",
+      privacyPolicy: false,
+    });
+
+    setFormValid({
+      email: false,
+      password: false,
+      repeatPassword: false,
+      privacyPolicy: false,
+    });
   };
 
   return (
