@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
+import {
+  emailValidation,
+  minLengthValidation,
+} from "../../../utils/formValidation";
 
 import "./scss/RegisterForm.scss";
 
@@ -8,6 +12,13 @@ const RegisterForm = () => {
     email: "",
     password: "",
     repeatPassword: "",
+    privacyPolicy: false,
+  });
+
+  const [formValid, setFormValid] = useState({
+    email: false,
+    password: false,
+    repeatPassword: false,
     privacyPolicy: false,
   });
 
@@ -25,9 +36,22 @@ const RegisterForm = () => {
     }
   };
 
+  const inputValidation = (e) => {
+    const { type, name } = e.target;
+
+    if (type === "email") {
+      setFormValid({ ...formValid, [name]: emailValidation(e.target) });
+    }
+    if (type === "password") {
+      setFormValid({ ...formValid, [name]: minLengthValidation(e.target, 6) });
+    }
+    if (type === "checkbox") {
+      setFormValid({ ...formValid, [name]: e.target.checked });
+    }
+  };
+
   const register = (e) => {
     e.preventDefault();
-    console.log(inputs);
   };
 
   return (
@@ -39,6 +63,7 @@ const RegisterForm = () => {
           name="email"
           placeholder="E-mail"
           className="register-form__input"
+          onChange={inputValidation}
           value={inputs.email}
         />
       </Form.Item>
@@ -49,6 +74,7 @@ const RegisterForm = () => {
           name="password"
           placeholder="Senha"
           className="register-form__input"
+          onChange={inputValidation}
           value={inputs.password}
         />
       </Form.Item>
@@ -59,11 +85,16 @@ const RegisterForm = () => {
           name="repeatPassword"
           placeholder="Repita a Senha"
           className="register-form__input"
+          onChange={inputValidation}
           value={inputs.repeatPassword}
         />
       </Form.Item>
       <Form.Item>
-        <Checkbox name="privacyPolicy" checked={inputs.privacyPolicy}>
+        <Checkbox
+          name="privacyPolicy"
+          checked={inputs.privacyPolicy}
+          onChange={inputValidation}
+        >
           Li e aceitei a política de privacidade
         </Checkbox>
       </Form.Item>
