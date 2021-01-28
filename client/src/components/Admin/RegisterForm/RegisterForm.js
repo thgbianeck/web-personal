@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Icon, Input, Button, Checkbox } from "antd";
+import { Form, Icon, Input, Button, Checkbox, notification } from "antd";
 import {
   emailValidation,
   minLengthValidation,
@@ -52,6 +52,25 @@ const RegisterForm = () => {
 
   const register = (e) => {
     e.preventDefault();
+    const { email, password, repeatPassword, privacyPolicy } = formValid;
+    const emailVal = inputs.email;
+    const passwordVal = inputs.password;
+    const repeatPasswordVal = inputs.repeatPassword;
+    const privacyPolicyVal = inputs.privacyPolicy;
+
+    if (!emailVal || !passwordVal || !repeatPasswordVal || !privacyPolicyVal) {
+      notification["error"]({
+        message: "Todos os campos são obrigatórios",
+      });
+    } else {
+      if (passwordVal !== repeatPasswordVal) {
+        notification["error"]({
+          message: "As senhas devem ser iguais.",
+        });
+      } else {
+        // TODO: conectar com a API e registrar o usuário
+      }
+    }
   };
 
   return (
