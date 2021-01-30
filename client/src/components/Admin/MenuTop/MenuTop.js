@@ -1,11 +1,17 @@
 import React from "react";
 import { Button, Icon } from "antd";
 import Logo from "../../../assets/img/png/logo-white.png";
+import { logout } from "../../../api/auth";
 
 import "./scss/MenuTop.scss";
 
 const MenuTop = (props) => {
   const { menuCollapsed, setMenuCollapsed } = props;
+
+  const logoutUser = () => {
+    logout();
+    window.location.reload();
+  };
 
   return (
     <div className="menu-top">
@@ -20,7 +26,7 @@ const MenuTop = (props) => {
         </Button>
       </div>
       <div className="menu-top__right">
-        <Button type="link" onClick={() => console.log("Desconectado.")}>
+        <Button type="link" onClick={logoutUser}>
           <Icon type="poweroff" />
         </Button>
       </div>
